@@ -271,20 +271,7 @@ body{
       document.cookie = key + "=" + value + ";" + expires + ";path=/";
     }
 
-    // Function to check if the 'banned' cookie is set and alert if it is
-    function checkBannedCookie() {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.startsWith('banned=')) {
-          alert('hi');
-          return;
-        }
-      }
-    }
-
     function start() {
-      checkBannedCookie();  // Check if the cookie is set
       setCookie('banned', 'true', 1);  // Setting the cookie
       
     }
