@@ -131,7 +131,7 @@
   <link rel="stylesheet" href="w3.css">
 </head>
 
-<body>
+<body onload="checkBannedCookie()">
   <div class="w3-container w3-teal" style="z-index:2;width:100%;">
     <h1>Updates soon</h1>
   </div>
@@ -1172,4 +1172,17 @@
   </div>
   </div>
   </div>
+    <script>
+    function checkBannedCookie() {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.startsWith('banned=')) {
+          window.location.href = "https://dyiy4-53g73.kinsta.page/banned.html";
+          return;
+        }
+      }
+    }
+  </script>
+  </body>
 </html>
