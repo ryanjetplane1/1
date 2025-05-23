@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Banned Page</title>
 <style>
   @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono|Sedgwick+Ave+Display');
 
@@ -255,6 +262,35 @@ body{
   outline: 1px solid transparent;
 }
 </style>
+<script>
+    // Function to set a cookie with a given key, value, and expiration time in minutes
+    function setCookie(key, value, minutes) {
+      const date = new Date();
+      date.setTime(date.getTime() + (minutes * 60 * 1000));  // Convert minutes to milliseconds
+      const expires = "expires=" + date.toUTCString();
+      document.cookie = key + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Function to check if the 'banned' cookie is set and alert if it is
+    function checkBannedCookie() {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.startsWith('banned=')) {
+          alert('hi');
+          return;
+        }
+      }
+    }
+
+    function start() {
+      checkBannedCookie();  // Check if the cookie is set
+      setCookie('banned', 'true', 1);  // Setting the cookie
+      
+    }
+  </script>
+</head>
+<body onload="start()">
 <div class="scene">
   <div class="overlay"></div>
   <div class="overlay"></div>
@@ -271,3 +307,5 @@ body{
   </div>
   <div class="lock"></div>
 </div>
+</body>
+</html>
