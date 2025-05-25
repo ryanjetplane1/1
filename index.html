@@ -1,1188 +1,223 @@
-<html>
-<script data-consolejs-channel="86754ed0-e8a9-32bc-5736-68b3681e226d" src="https://remotejs.com/agent/agent.js"></script>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon"
-    href="http://dyiy4-53g73.kinsta.page/img/favicon.ico">
-  <title>Google docs</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Hub</title>
+  <link rel="icon" href="http://dyiy4-53g73.kinsta.page/img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="w3.css" />
   <style>
-    #mySearch {
-      width: 50%;
-      text-align: center;
-      font-size: 18px;
-      color: #FFFFFF;
-      padding: 11px;
-      border: 2px solid #ddd;
-      border-radius: 30px;
-      background-color: rgb(53, 53, 53);
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .rcorners3 {
-      border-radius: 25px;
-      background-position: left top;
-      background-repeat: repeat;
-      padding: 20px;
-      wid: 100px;
-      height: 150px;
-    }
-
-    .container {
-      border-radius: 25px;
-      margin-right: auto;
-      margin-left: auto;
-      padding: 20px padding-left: 15px;
-      padding-right: 15px;
-      background-color: #fff;
-      border: solid;
-      border-wid: medium;
-      border-color: #fff;
-    }
-
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: linear-gradient(#141e30, #243b55);
-
-    }
-
-    a {
-      color: Black;
-    }
-
-    h1 {
       color: white;
     }
 
-    .col-index-game {
-      height: auto;
-      float: center;
-      margin-bottom: 20px;
-      padding: 13px;
-    }
-
-    .img-game-index {
-      max-Height: 160px;
-      Wid: auto;
-      padding: 0px;
-      border-style: solid;
-    }
-
-    h6 {
-      font-size: 1.8rem;
-      line-height: 1.6;
-      letter-spacing: 0;
-      color: White;
-    }
-
-    .col-index-game h6 {
-      margin-bottom: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-weight: 300;
-      display: block;
+    header {
+      background-color: teal;
+      padding: 20px;
       text-align: center;
+    }
+
+    nav {
+      background: #f1f1f1;
+      padding: 1rem;
+    }
+
+    nav h3 {
       margin-top: 0;
-      margin-bottom: 2rem;
-      font-size: 1em;
-      padding: 3px
+    }
+
+    nav a {
+      display: block;
+      margin: 0.5rem 0;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 2rem;
+    }
+
+    .game-card {
+      position: relative;
+      width: 250px;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 2px solid white;
+      transition: transform 0.3s ease;
+    }
+
+    .game-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
     }
 
     .overlay {
       position: absolute;
-      height: auto;
-      float: center;
-      top: 0;
       bottom: 0;
-      left: 0;
-      right: 0;
-      height: 150px;
-      wid: 265px;
-      opacity: 0;
-      transition: .5s ease;
-      background-color: #050505;
-      pointer-events: none;
-
-    }
-
-    .container2:hover .overlay {
-      opacity: .75;
-    }
-
-    .container2 {
-      position: relative;
-      wid: 50%;
-    }
-
-    div.scroll {
-
-      wid: 1300px;
-      height: 600px;
-      overflow-x: hidden;
-      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      width: 100%;
+      padding: 10px;
       text-align: center;
-      padding: 20px;
+      font-size: 1rem;
+    }
 
+    .search-bar {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    #mySearch {
+      width: 50%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      background-color: #333;
+      color: white;
+    }
+
+    @media screen and (max-width: 600px) {
+      #mySearch {
+        width: 80%;
+      }
+
+      .game-card {
+        width: 90%;
+      }
     }
   </style>
-  <meta name="viewport" content="wid=device-wid, initial-scale=1">
-  <link rel="stylesheet" href="w3.css">
 </head>
 
 <body onload="checkBannedCookie()">
-  <div class="w3-container w3-teal" style="z-index:2;width:100%;">
-    <h1>Updates soon</h1>
-  </div>
-  <!-- Sidebar -->
-  <div class="w3-sidebar w3-light-grey w3-bar-block" style="position:unset">
-    <h3 class="w3-bar-item">Pages</h3>
-    <a href="https://discord.gg/cVcuv62C4Q" class="w3-bar-item w3-button">TMS Discord</a>
-  </div>
-  <div style="margin-left:20%" class="scroll" id="search">
-    <div style="margin-top:10%"">
-        <div class=" text-center">
-      <input type="text" class="text-center" id="mySearch" onload="startSearch()" onkeyup="startSearch()"
-        placeholder="Search for games..." title="Search" autofocus />
-    </div>
-    <script src="search.js"></script>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://idvij-kctpy.kinsta.page/games/10-min-till-dawn/index.html"><img
-            class="img-game-index rcorners3" src="img/10-min-till-dawn.png"></a>
-        <h6 class="overlay rcorners3">10 minutes till dawn</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://v7ukp-nvu1g.kinsta.page/games/super-flash-sonic/index.html"><img
-            class="img-game-index rcorners3" src="img/super-flash-sonic.jpeg"></a>
-        <h6 class="overlay rcorners3">Super flash sonic</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://hfiqw-46d8o.kinsta.page/games/idle-dice/index.html"><img
-            class="img-game-index rcorners3" src="img/idle-dice.jpeg"></a>
-        <h6 class="overlay rcorners3">Idle dice</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/rabbit-samuri/index.html"><img
-            class="img-game-index rcorners3" src="img/rabbit-samuri.jpeg"></a>
-        <h6 class="overlay rcorners3">Rabbit samuri 2</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://k8sn3-15oyh.kinsta.page/games/basket-random/index.html"><img
-            class="img-game-index rcorners3"
-            src="img/basket-random.jpeg"></a>
-        <h6 class="overlay rcorners3">Basket random</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://idvij-kctpy.kinsta.page/games/admist-the-clouds/index.html"><img
-            class="img-game-index rcorners3"
-            src="img/admist-the-clouds.jpeg"></a>
-        <h6 class="overlay rcorners3">Admist the clouds</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://hfiqw-46d8o.kinsta.page/games/jet-pack-joyride/index.html"><img
-            class="img-game-index rcorners3"
-            src="img/jetpack-joyride.jpeg"></a>
-        <h6 class="overlay rcorners3">Jet pack joyride</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://k8sn3-15oyh.kinsta.page/games/bike-mania/index.html"><img
-            class="img-game-index rcorners3" src="img/bike-mania.jpeg"></a>
-        <h6 class="overlay rcorners3">Bike mania</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/radius-raid/index.html"><img
-            class="img-game-index rcorners3" src="img/radius-raid.jpeg"></a>
-        <h6 class="overlay rcorners3">Radius raid</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://bn7f4-qrl82.kinsta.page/games/uno/index.html"><img
-            class="img-game-index rcorners3" src="img/uno.jpeg"></a>
-        <h6 class="overlay rcorners3">Uno</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://o1vbe-ruf9g.kinsta.page/games/fire-truck-dash/index.html"><img
-            class="img-game-index rcorners3" src="img/firetruck-dash.jpeg"></a>
-        <h6 class="overlay rcorners3">Firetruck dash</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://idvij-kctpy.kinsta.page/games/alighn-4/index.html"><img
-            class="img-game-index rcorners3" src="img/alighn-4.jpg"></a>
-        <h6 class="overlay rcorners3">Alighn 4</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://mofp5g.csb.app/index.html"><img class="img-game-index rcorners3" src="img/ovo.jpeg"></a>
-        <h6 class="overlay rcorners3">Ovo</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://o1vbe-ruf9g.kinsta.page/games/csgo-clicker/index.html"><img
-            class="img-game-index rcorners3" src="img/csgo-clicker.jpg"></a>
-        <h6 class="overlay rcorners3">Csgo clicker</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://bn7f4-qrl82.kinsta.page/games/whack-your-boss/index.html"><img
-            class="img-game-index rcorners3" src="img/whack-your-boss.jpeg"></a>
-        <h6 class="overlay rcorners3">Whack your boss</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/more-ore/index.html"><img
-            class="img-game-index rcorners3" src="img/more-ore.jpeg"></a>
-        <h6 class="overlay rcorners3">More ore</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://k8sn3-15oyh.kinsta.page/games/bloons-td-3/index.html"><img
-            class="img-game-index rcorners3" src="img/bloons-td-3.jpg"></a>
-        <h6 class="overlay rcorners3">Bloons td 3</h6>
-      </div>
-    </div>
-   <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://k8sn3-15oyh.kinsta.page/games/burrito-bison/index.html"><img
-            class="img-game-index rcorners3" src="img/burito-bison.jpeg"></a>
-        <h6 class="overlay rcorners3">Burrito bison</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://o1vbe-ruf9g.kinsta.page/games/fancy-pants-adventure/index.html"><img
-            class="img-game-index rcorners3" src="img/Fancy-pants-adventure.jpeg"></a>
-        <h6 class="overlay rcorners3">Fancy pants adventure</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/parking-fury-3/index.html"><img
-            class="img-game-index rcorners3" src="img/parking-fury-3.jpeg"></a>
-        <h6 class="overlay rcorners3">Parking fury 3</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://k8sn3-15oyh.kinsta.page/games/big-red-button/index.html"><img
-            class="img-game-index rcorners3" src="img/big-red-button.jpeg"></a>
-        <h6 class="overlay rcorners3">Big red button</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://o1vbe-ruf9g.kinsta.page/games/creative-kill-chamber/index.html"><img
-            class="img-game-index rcorners3" src="img/creative-kill-chamber.jpeg"></a>
-        <h6 class="overlay rcorners3">Creative kill chamber</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://k8sn3-15oyh.kinsta.page/games/Binding-of-isac/index.html"><img
-            class="img-game-index rcorners3" src="img/binding-of-isac.jpeg"></a>
-        <h6 class="overlay rcorners3">Binding of isaac</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://idvij-kctpy.kinsta.page/games/awesome-planes/index.html"><img
-            class="img-game-index rcorners3" src="img/awesome-planes.jpg"></a>
-        <h6 class="overlay rcorners3">Awesome planes</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://bn7f4-qrl82.kinsta.page/games/veloce/index.html"><img
-            class="img-game-index rcorners3" src="img/veloce.png"></a>
-        <h6 class="overlay rcorners3">Veloce</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://bn7f4-qrl82.kinsta.page/games/vex-6/index.html"><img
-            class="img-game-index rcorners3" src="img/vex-6.jpeg"></a>
-        <h6 class="overlay rcorners3">Vex 6</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://k8sn3-15oyh.kinsta.page/games/bit-planes/index.html"><img
-            class="img-game-index rcorners3" src="img/bit-planes.jpeg"></a>
-        <h6 class="overlay rcorners3">Bit planes</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://o1vbe-ruf9g.kinsta.page/games/doge-miner/index.html"><img
-            class="img-game-index rcorners3" src="img/doge-miner.jpeg"></a>
-        <h6 class="overlay rcorners3">Doge miner</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/L2F/index.html"><img
-            class="img-game-index rcorners3" src="img/L2F.jpeg"></a>
-        <h6 class="overlay rcorners3">Learn to fly</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://bn7f4-qrl82.kinsta.page/games/time-shooter-3/index.html"><img
-            class="img-game-index rcorners3" src="img/time-shooter-3.jpeg"></a>
-        <h6 class="overlay rcorners3">Time shooter 3</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://o1vbe-ruf9g.kinsta.page/games/drive-mad/index.html"><img
-            class="img-game-index rcorners3" src="img/drive-mad.jpeg"></a>
-        <h6 class="overlay rcorners3">Drive mad</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/slope-2/index.html"><img
-            class="img-game-index rcorners3" src="img/slope-2.jpeg"></a>
-        <h6 class="overlay rcorners3">Slope 2</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/n-gon/index.html"><img
-            class="img-game-index rcorners3" src="img/n-gon.png"></a>
-        <h6 class="overlay rcorners3">N-gon</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://kfony-b1u5o.kinsta.page/games/noob-steve-parkour/index.html"><img
-            class="img-game-index rcorners3" src="img/noob-steve-parkour.jpeg"></a>
-        <h6 class="overlay rcorners3">Noob steve parkour</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/raft-wars/index.html"><img
-            class="img-game-index rcorners3" src="img/raft-wars.jpeg"></a>
-        <h6 class="overlay rcorners3">Raft wars</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/raft-wars-2/index.html"><img
-            class="img-game-index rcorners3" src="img/raft-wars-2.jpeg"></a>
-        <h6 class="overlay rcorners3">Raft wars 2</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://bn7f4-qrl82.kinsta.page/games/toss-the-turtle/index.html"><img
-            class="img-game-index rcorners3" src="img/toss-the-turtle.jpeg"></a>
-        <h6 class="overlay rcorners3">Toss the turtle</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/papas-pizzaria/index.html"><img
-          class="img-game-index rcorners3" src="img/papas.jpeg"></a>
-      <h6 class="overlay rcorners3">Papas pizzaria</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/paper-io2/index.html"><img
-          class="img-game-index rcorners3" src="img/paper-io-2.jpg"></a>
-      <h6 class="overlay rcorners3">Paper io 2</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://o1vbe-ruf9g.kinsta.page/games/dragon-vs-bricks/index.html"><img
-          class="img-game-index rcorners3" src="img/dragon-vs-brick.jpeg"></a>
-      <h6 class="overlay rcorners3">Dragon vs bricks</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://idvij-kctpy.kinsta.page/games/1v1lol/index.html"><img
-          class="img-game-index rcorners3" src="img/1v1lol.jpeg"></a>
-      <h6 class="overlay rcorners3">1v1lol</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/superhot/index.html"><img
-          class="img-game-index rcorners3" src="img/superhot.jpg"></a>
-      <h6 class="overlay rcorners3">Super hot</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://dyiy4-53g73.kinsta.page/games/roof-top-snipers/index.html"><img
-          class="img-game-index rcorners3" src="img/roof-top-snipers.jpeg"></a>
-      <h6 class="overlay rcorners3">Roof top snipers</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/basket-bros/index.html"><img
-          class="img-game-index rcorners3" src="img/basket-bros.jpeg"></a>
-      <h6 class="overlay rcorners3">Basket bros</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://o1vbe-ruf9g.kinsta.page/games/fnaw/index.html"><img
-          class="img-game-index rcorners3" src="img/winston.jpeg"></a>
-      <h6 class="overlay rcorners3">Five nights at winstons</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://idvij-kctpy.kinsta.page/games/aquapark/index.html"><img
-          class="img-game-index rcorners3" src="img/aquapark.jpeg"></a>
-      <h6 class="overlay rcorners3">Aquapark.io</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float:left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/subway-surfers/index.html"><img
-          class="img-game-index rcorners3" src="img/maxresdefault.jpg"></a>
-      <h6 class="overlay rcorners3">Subway surfers</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/tiny-fishing/index.html"><img
-          class="img-game-index rcorners3" src="img/tiny-fishing.jpeg"></a>
-      <h6 class="overlay rcorners3">Tiny fishing</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://dyiy4-53g73.kinsta.page/games/slope/index.html"><img
-          class="img-game-index rcorners3" src="img/slope.jpeg"></a>
-      <h6 class="overlay rcorners3">Slope</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="https://COPYPASTEHERE/games/this-is-the-only-level/index.html"><img
-          class="img-game-index rcorners3" src="img/this-is-the-only-level.jpg"></a>
-      <h6 class="overlay rcorners3">This is the only level</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/idle-breakout/index.html"><img
-          class="img-game-index rcorners3" src="img/idle-breakout.png"></a>
-      <h6 class="overlay rcorners3">Idle breakout</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/pixel-gun/index.html"><img
-          class="img-game-index rcorners3" src="img/pixel-gun.jpeg"></a>
-      <h6 class="overlay rcorners3">Pixel gun</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/stickman-hook/index.html"><img
-          class="img-game-index rcorners3" src="img/stickman-hook.jpeg"></a>
-      <h6 class="overlay rcorners3">Stickman hook</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://idvij-kctpy.kinsta.page/games/awesome-tanks2/index.html"><img
-          class="img-game-index rcorners3" src="img/awesome-tanks-2.jpeg"></a>
-      <h6 class="overlay rcorners3">Awesome tanks 2</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://dyiy4-53g73.kinsta.page/games/sand-boxels/index.html"><img
-          class="img-game-index rcorners3" src="img/sandboxels.jpg"></a>
-      <h6 class="overlay rcorners3">Sand boxels</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/hungry-lemu/index.html"><img
-          class="img-game-index rcorners3" src="img/hungry-lemu.jpg"></a>
-      <h6 class="overlay rcorners3">Hungry lemu</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/getaway-shootout/index.html"><img
-          class="img-game-index rcorners3" src="img/getaway-shootout.jpg"></a>
-      <h6 class="overlay rcorners3">Getaway shootout</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/smoking-barels/index.html"><img
-          class="img-game-index rcorners3" src="img/smoking-barrels.jpg"></a>
-      <h6 class="overlay rcorners3">Smoking barrels</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://idvij-kctpy.kinsta.page/games/achivement-unlocked/index.html"><img
-          class="img-game-index rcorners3" src="img/achievement-unlocked.jpeg"></a>
-      <h6 class="overlay rcorners3">Achivement unlocked</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://dyiy4-53g73.kinsta.page/games/retro-bowl/index.html"><img
-          class="img-game-index rcorners3" src="img/retro-bowl.jpeg"></a>
-      <h6 class="overlay rcorners3">Retro bowl</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/station-141/index.html"><img
-          class="img-game-index rcorners3" src="img/station-141.jpg"></a>
-      <h6 class="overlay rcorners3">Station-141</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/greybox/index.html"><img
-          class="img-game-index rcorners3" src="img/eHRngs.jpg"></a>
-      <h6 class="overlay rcorners3">Greybox testing</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/back-rooms/index.html"><img
-          class="img-game-index rcorners3" src="img/backrooms.jpg"></a>
-      <h6 class="overlay rcorners3">The backrooms</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/cars-sim/index.html"><img
-          class="img-game-index rcorners3" src="img/car-sim.jpg"></a>
-      <h6 class="overlay rcorners3">Car simulator</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/tube-jumpers/index.html"><img
-          class="img-game-index rcorners3" src="img/tube-jumpers.jpg"></a>
-      <h6 class="overlay rcorners3">Tube jumpers</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://o1vbe-ruf9g.kinsta.page/games/cluster-truck/index.html"><img
-          class="img-game-index rcorners3" src="img/cluster-truck.jpg"></a>
-      <h6 class="overlay rcorners3">Cluster truck</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/tactical-weapon-pack/index.html"><img class="img-game-index rcorners3" src="img/tactical-weapon-pack.jpeg"></a>
-      <h6 class="overlay rcorners3">Tactical weapon pack</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/soundboard/index.html"><img class="img-game-index rcorners3" src="img/soundboard.jpeg"></a>
-      <h6 class="overlay rcorners3">Soundboard</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://dyiy4-53g73.kinsta.page/games/santy-is-home/index.html"><img class="img-game-index rcorners3" src="img/santy-is-home.jpg"></a>
-      <h6 class="overlay rcorners3">Santy is home</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/synthesia/index.html"><img
-          class="img-game-index rcorners3" src="img/synthesia.jpeg"></a>
-      <h6 class="overlay rcorners3">Synthesia</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/circlo/index.html"><img
-          class="img-game-index rcorners3" src="img/circlo.jpg"></a>
-      <h6 class="overlay rcorners3">Circlo</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/tactical-assasin/index.html"><img
-          class="img-game-index rcorners3" src="img/tactical-assasin.jpeg"></a>
-      <h6 class="overlay rcorners3">Tactical assasin</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/gunblood/index.html"><img
-          class="img-game-index rcorners3" src="img/gunblood.jpeg"></a>
-      <h6 class="overlay rcorners3">Gunblood</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/warfare-1917/index.html"><img
-          class="img-game-index rcorners3" src="img/warfare-1917.jpeg"></a>
-      <h6 class="overlay rcorners3">Warfare 1917</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/warfare-1944/index.html"><img
-          class="img-game-index rcorners3" src="img/warfare-1944.jpeg"></a>
-      <h6 class="overlay rcorners3">Warefare 1944</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/gun-mayhem/index.html"><img
-          class="img-game-index rcorners3" src="img/gun-mayhem-2.jpeg"></a>
-      <h6 class="overlay rcorners3">Gun mayhem 2</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/basket-ball-stars/index.html"><img
-          class="img-game-index rcorners3" src="img/basketball-stars.jpeg"></a>
-      <h6 class="overlay rcorners3">Basket ball stars</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/gun-master-2.0/index.html"><img
-          class="img-game-index rcorners3" src="img/gun-master-2.0.jpeg"></a>
-      <h6 class="overlay rcorners3">Gun master 2.0</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://o1vbe-ruf9g.kinsta.page/games/fluid-sim/index.html"><img
-          class="img-game-index rcorners3" src="img/fluid-sim.jpeg"></a>
-      <h6 class="overlay rcorners3">Fluid sim</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/weave-silk/index.html"><img
-          class="img-game-index rcorners3" src="img/weave-silk.jpeg"></a>
-      <h6 class="overlay rcorners3">Weave silk</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/wolf3d/index.html"><img
-          class="img-game-index rcorners3" src="img/wolfenstien.jpeg"></a>
-      <h6 class="overlay rcorners3">Wolfenstein</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/the-final-earth/index.html"><img
-          class="img-game-index rcorners3" src="img/the-final-earth.jpeg"></a>
-      <h6 class="overlay rcorners3">The final earth </h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/johnny-upgrade/index.html"><img
-          class="img-game-index rcorners3" src="img/johnny-upgrade.png"></a>
-      <h6 class="overlay rcorners3">Johnny upgrade</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/temple-run-2/index.html"><img
-          class="img-game-index rcorners3" src="img/temple-run-2.jpeg"></a>
-      <h6 class="overlay rcorners3">Temple run 2</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/blumgi-slime/index.html"><img
-          class="img-game-index rcorners3" src="img/blumgi-slime.jpeg"></a>
-      <h6 class="overlay rcorners3">Blumgi slime</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/bit-life/index.html"><img
-          class="img-game-index rcorners3" src="img/bit-life.png"></a>
-      <h6 class="overlay rcorners3">Bit life</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/soccer-skills-world-cup/index.html"><img
-          class="img-game-index rcorners3" src="img/soccer-skills.jpg"></a>
-      <h6 class="overlay rcorners3">Soccer skills</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/monkey-mart/index.html"><img
-          class="img-game-index rcorners3" src="img/monkey-mart.jpeg"></a>
-      <h6 class="overlay rcorners3">Monkey mart</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://k8sn3-15oyh.kinsta.page/games/chicken-merge/index.html"><img
-          class="img-game-index rcorners3" src="img/chicken-merge.jpeg"></a>
-      <h6 class="overlay rcorners3">Chicken merge</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://idvij-kctpy.kinsta.page/games/backpack-battles/index.html"><img
-          class="img-game-index rcorners3" src="img/backpack-battels.jpeg"></a>
-      <h6 class="overlay rcorners3">Backpack battles</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/little-chef/index.html"><img
-          class="img-game-index rcorners3" src="img/little-chef.jpeg"></a>
-      <h6 class="overlay rcorners3">Little chef</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/on-a-role/index.html"><img
-          class="img-game-index rcorners3" src="img/on-a-roll.jpeg"></a>
-      <h6 class="overlay rcorners3">On a role</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://dyiy4-53g73.kinsta.page/games/six-cats-under/index.html"><img
-          class="img-game-index rcorners3" src="img/six-cats-under.jpeg"></a>
-      <h6 class="overlay rcorners3">six cats under</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://bn7f4-qrl82.kinsta.page/games/what-goes-up/index.html"><img
-          class="img-game-index rcorners3" src="img/what-goes-up.jpeg"></a>
-      <h6 class="overlay rcorners3">What goes up</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://v7ukp-nvu1g.kinsta.page/games/spirit-dungeons/index.html"><img
-          class="img-game-index rcorners3" src="img/spirit-dungeons.jpeg"></a>
-      <h6 class="overlay rcorners3">Spirit dungeons</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/plant-idle/index.html"><img
-          class="img-game-index rcorners3" src="img/plant-daddy.jpeg"></a>
-      <h6 class="overlay rcorners3">Plant daddy</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/mine-cards/index.html"><img
-          class="img-game-index rcorners3" src="img/mine-cards.jpeg"></a>
-      <h6 class="overlay rcorners3">Mine cards</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/light-dancer/index.html"><img
-          class="img-game-index rcorners3" src="img/light-dancer.jpeg"></a>
-      <h6 class="overlay rcorners3">Light dancer</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/grapple-whip/index.html"><img
-          class="img-game-index rcorners3" src="img/grapple-whip.jpeg"></a>
-      <h6 class="overlay rcorners3">Grapple whip</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/push-the-square/index.html"><img
-          class="img-game-index rcorners3" src="img/push-the-square.jpeg"></a>
-      <h6 class="overlay rcorners3">Push the square</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://idvij-kctpy.kinsta.page/games/abyss-idle/index.html"><img
-          class="img-game-index rcorners3" src="img/abyss-idle-miner.jpeg"></a>
-      <h6 class="overlay rcorners3">Abyss idle miner</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://dyiy4-53g73.kinsta.page/chat.html/index.html"><img
-          class="img-game-index rcorners3" src="img/chat.png"></a>
-      <h6 class="overlay rcorners3">Chat</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://o1vbe-ruf9g.kinsta.page/games/eaglercraft/index.html"><img
-          class="img-game-index rcorners3" src="img/eaglercraft.jpeg"></a>
-      <h6 class="overlay rcorners3">Eaglercraft 1.5.2</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/house-of-hazards/index.html"><img
-          class="img-game-index rcorners3" src="img/house-of-hazards.jpeg"></a>
-      <h6 class="overlay rcorners3">House of hazards</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://hfiqw-46d8o.kinsta.page/games/katii/index.html"><img
-          class="img-game-index rcorners3" src="img/katii.png"></a>
-      <h6 class="overlay rcorners3">Katii</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://kfony-b1u5o.kinsta.page/games/sm-64/index.html"><img
-          class="img-game-index rcorners3" src="img/sm-64.jpeg"></a>
-      <h6 class="overlay rcorners3">Super mario 64</h6>
-    </div>
-  </div>
-  <div class="col-index-game" style="float: left">
-    <div class="container2">
-      <a href="http://o1vbe-ruf9g.kinsta.page/games/clay-scape/index.html"><img
-          class="img-game-index rcorners3" src="img/clay-scape.jpeg"></a>
-      <h6 class="overlay rcorners3">Clay scape</h6>
-    </div>
-  </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/sift-heads-1/index.html"><img
-            class="img-game-index rcorners3" src="img/sift-heads-1.jpeg"></a>
-        <h6 class="overlay rcorners3">Sift heads 1</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/sift-heads-2/index.html"><img
-            class="img-game-index rcorners3" src="img/sift-heads-2.jpeg"></a>
-        <h6 class="overlay rcorners3">Sift heads 2</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/sift-heads-3/index.html"><img
-            class="img-game-index rcorners3" src="img/sift-heads-3.jpeg"></a>
-        <h6 class="overlay rcorners3">Sift heads 3</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/sift-heads-4/index.html"><img
-            class="img-game-index rcorners3" src="img/sift-heads-4.jpeg"></a>
-        <h6 class="overlay rcorners3">Sift heads 4</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/sift-heads-5/index.html"><img
-            class="img-game-index rcorners3" src="img/sift-heads-5.jpeg"></a>
-        <h6 class="overlay rcorners3">Sift heads 5</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/sift-heads-6/index.html"><img
-            class="img-game-index rcorners3" src="img/sift-heads-6.jpeg"></a>
-        <h6 class="overlay rcorners3">Sift heads 6</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://dyiy4-53g73.kinsta.page/games/sift-heads-7/index.html"><img
-            class="img-game-index rcorners3" src="img/sift-heads-7.jpeg"></a>
-        <h6 class="overlay rcorners3">Sift heads 7</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://v7ukp-nvu1g.kinsta.page/games/super-pinball-maker/index.html"><img
-            class="img-game-index rcorners3" src="img/super-pinball-maker.jpg"></a>
-        <h6 class="overlay rcorners3">Super pinball maker</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://v7ukp-nvu1g.kinsta.page/games/soccer-journey/index.html"><img
-            class="img-game-index rcorners3" src="img/soccer-journey.jpg"></a>
-        <h6 class="overlay rcorners3">soccer journey</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://o1vbe-ruf9g.kinsta.page/games/geometry-dash/index.html"><img
-            class="img-game-index rcorners3" src="img/geo-dash.jpeg"></a>
-        <h6 class="overlay rcorners3">Geometry dash</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://bn7f4-qrl82.kinsta.page/games/amazing-rope-police-main/index.html"><img
-            class="img-game-index rcorners3" src="img/amazing-rope-police.jpeg"></a>
-        <h6 class="overlay rcorners3">Amazing rope police</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://s4qo7-wvd91.kinsta.page/games/helicopter-assassin-main/index.html"><img
-            class="img-game-index rcorners3" src="img/helicopter-assasin.jpeg"></a>
-        <h6 class="overlay rcorners3">Helicopter Asassin</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://s4qo7-wvd91.kinsta.page/games/jelly-truck-main/index.html"><img
-            class="img-game-index rcorners3" src="img/jelly-truck.jpeg"></a>
-        <h6 class="overlay rcorners3">Jelly Truck</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://s4qo7-wvd91.kinsta.page/games/ovo-dimensions/index.html"><img
-            class="img-game-index rcorners3" src="img/ovo-dimensions.jpeg"></a>
-        <h6 class="overlay rcorners3">OvO Dimensions</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://s4qo7-wvd91.kinsta.page/games/the-impossible-quiz-2-main/index.html"><img
-            class="img-game-index rcorners3" src="img/the-impossible-quiz-2.jpeg"></a>
-        <h6 class="overlay rcorners3">Impossible quiz 2</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://s4qo7-wvd91.kinsta.page/games/worlds-hardest-game-main/index.html"><img
-            class="img-game-index rcorners3" src="img/the-worlds-hardest-game.png"></a>
-        <h6 class="overlay rcorners3">Worlds hardest game</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="http://s4qo7-wvd91.kinsta.page/games/suika-game-main/index.html"><img
-            class="img-game-index rcorners3" src="img/suika-game.jpeg"></a>
-        <h6 class="overlay rcorners3">Suika game</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://u592a-bjnsc.kinsta.page/games/gacha/index.html"><img
-            class="img-game-index rcorners3" src="img/gacha.png"></a>
-        <h6 class="overlay rcorners3">Gacha</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://u592a-bjnsc.kinsta.page/games/happy-cat-tavern/index.html"><img
-            class="img-game-index rcorners3" src="img/happy-cat-tavern.jpeg"></a>
-        <h6 class="overlay rcorners3">Happy cat tavern</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://u592a-bjnsc.kinsta.page/games/help-no-brake/index.html"><img
-            class="img-game-index rcorners3" src="img/help-no-brake.jpeg"></a>
-        <h6 class="overlay rcorners3">Help no brake</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://u592a-bjnsc.kinsta.page/games/iori/index.html"><img
-            class="img-game-index rcorners3" src="img/iori.png"></a>
-        <h6 class="overlay rcorners3">iori</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://u592a-bjnsc.kinsta.page/games/pikwip/index.html"><img
-            class="img-game-index rcorners3" src="img/pikwip.jpeg"></a>
-        <h6 class="overlay rcorners3">Pikwip</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://u592a-bjnsc.kinsta.page/games/polytrack/index.html"><img
-            class="img-game-index rcorners3" src="img/polytrack.jpeg"></a>
-        <h6 class="overlay rcorners3">Polytrack</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://u592a-bjnsc.kinsta.page/games/pokemon/index.html"><img
-            class="img-game-index rcorners3" src="img/pokemon.jpg"></a>
-        <h6 class="overlay rcorners3">Pokemon leaf green</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/auto-necrochess/index.html"><img
-            class="img-game-index rcorners3" src="img/necro-chess.jpeg"></a>
-        <h6 class="overlay rcorners3">Auto necrochess</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/balls-dice-stickers/index.html"><img
-            class="img-game-index rcorners3" src="img/balls-dice-stickers.jpg"></a>
-        <h6 class="overlay rcorners3">Balls dice stickers</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/dome-romantik/index.html"><img
-            class="img-game-index rcorners3" src="img/dome-romantik.jpeg"></a>
-        <h6 class="overlay rcorners3">Dome romantik</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/switchblade/index.html"><img
-            class="img-game-index rcorners3" src="img/switchblade.png"></a>
-        <h6 class="overlay rcorners3">Switchblade (Slow)</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/wildfire/index.html"><img
-            class="img-game-index rcorners3" src="img/wildfire.jpg"></a>
-        <h6 class="overlay rcorners3">Wildfire</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/solar-sandbox/index.html"><img
-            class="img-game-index rcorners3" src="img/solar-sandbox.jpg"></a>
-        <h6 class="overlay rcorners3">Solar sandbox</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/mobs-inc/index.html"><img
-            class="img-game-index rcorners3" src="img/mobs-inc.jpeg"></a>
-        <h6 class="overlay rcorners3">Mobs inc</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/lored/index.html"><img
-            class="img-game-index rcorners3" src="img/lored.jpeg"></a>
-        <h6 class="overlay rcorners3">Lored</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://ostp5-86a3l.kinsta.page/games/accelenation/index.html"><img
-            class="img-game-index rcorners3" src="img/accele-nation.jpeg"></a>
-        <h6 class="overlay rcorners3">Accele nation</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://vvx7o-mdgpn.kinsta.page/games/sm63/index.html"><img
-            class="img-game-index rcorners3" src="img/sm63.jpg"></a>
-        <h6 class="overlay rcorners3">Sm63</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://vvx7o-mdgpn.kinsta.page/games/reel/index.html"><img
-            class="img-game-index rcorners3" src="img/reel.png"></a>
-        <h6 class="overlay rcorners3">Reel</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://vvx7o-mdgpn.kinsta.page/games/cubelight/index.html"><img
-            class="img-game-index rcorners3" src="img/cubelight.jpeg"></a>
-        <h6 class="overlay rcorners3">Cubelight</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://vvx7o-mdgpn.kinsta.page/games/bobdob/index.html"><img
-            class="img-game-index rcorners3" src="img/bob-dob.jpg"></a>
-        <h6 class="overlay rcorners3">Bob dob</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://vvx7o-mdgpn.kinsta.page/games/banners-begone/index.html"><img
-            class="img-game-index rcorners3" src="img/banners-begone.jpeg"></a>
-        <h6 class="overlay rcorners3">Banners begone</h6>
-      </div>
-    </div>
-    <div class="col-index-game" style="float: left">
-      <div class="container2">
-        <a href="https://vvx7o-mdgpn.kinsta.page/games/get-yoked/index.html"><img
-            class="img-game-index rcorners3" src="img/get-yoked.jpeg"></a>
-        <h6 class="overlay rcorners3">Get yoked</h6>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-    <script>
-    function checkBannedCookie() {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.startsWith('banned=')) {
-          window.location.href = "https://dyiy4-53g73.kinsta.page/banned.html";
-          return;
-        }
-      }
-    }
-  </script>
-  </body>
-</html>
+  <header>
+    <h1>Updates Soon</h1>
+  </header>
+
+  <nav>
+    <h3>Pages</h3>
+    <a href="https://discord.gg/cVcuv62C4Q">TMS Discord</a>
+  </nav>
+
+  <section class="search-bar">
+    <input type="text" id="mySearch" onkeyup="startSearch()" placeholder="Search for games..." />
+  </section>
+
+  <main class="main-content" id="gameGallery">
+
+    <!-- Repeat for each game -->
+    <a class="game-card" href="http://idvij-kctpy.kinsta.page/games/10-min-till-dawn/index.html">
+      <img src="img/10-min-till-dawn.png" alt="10 Minutes Till Dawn">
+      <div class="overlay">10 Minutes Till Dawn</div>
+    </a>
+
+    <a class="game-card" href="http://v7ukp-nvu1g.kinsta.page/games/super-flash-sonic/index.html">
+      <img src="img/super-flash-sonic.jpeg" alt="Super Flash Sonic">
+      <div class="overlay">Super Flash Sonic</div>
+    </a>
+
+    <a class="game-card" href="http://hfiqw-46d8o.kinsta.page/games/idle-dice/index.html">
+      <img src="img/idle-dice.jpeg" alt="Idle Dice">
+      <div class="overlay">Idle Dice</div>
+    </a>
+
+    <a class="game-card" href="http://kfony-b1u5o.kinsta.page/games/rabbit-samuri/index.html">
+      <img src="img/rabbit-samuri.jpeg" alt="Rabbit Samuri 2">
+      <div class="overlay">Rabbit Samuri 2</div>
+    </a>
+
+    <a class="game-card" href="http://k8sn3-15oyh.kinsta.page/games/basket-random/index.html">
+      <img src="img/basket-random.jpeg" alt="Basket Random">
+      <div class="overlay">Basket Random</div>
+    </a>
+
+    <a class="game-card" href="http://idvij-kctpy.kinsta.page/games/admist-the-clouds/index.html">
+      <img src="img/admist-the-clouds.jpeg" alt="Admist The Clouds">
+      <div class="overlay">Admist The Clouds</div>
+    </a>
+
+    <a class="game-card" href="http://hfiqw-46d8o.kinsta.page/games/jet-pack-joyride/index.html">
+      <img src="img/jetpack-joyride.jpeg" alt="Jet Pack Joyride">
+      <div class="overlay">Jet Pack Joyride</div>
+    </a>
+
+    <a class="game-card" href="http://k8sn3-15oyh.kinsta.page/games/bike-mania/index.html">
+      <img src="img/bike-mania.jpeg" alt="Bike Mania">
+      <div class="overlay">Bike Mania</div>
+    </a>
+
+    <a class="game-card" href="http://kfony-b1u5o.kinsta.page/games/radius-raid/index.html">
+      <img src="img/radius-raid.jpeg" alt="Radius Raid">
+      <div class="overlay">Radius Raid</div>
+    </a>
+
+    <a class="game-card" href="http://bn7f4-qrl82.kinsta.page/games/uno/index.html">
+      <img src="img/uno.jpeg" alt="Uno">
+      <div class="overlay">Uno</div>
+    </a>
+
+    <a class="game-card" href="http://o1vbe-ruf9g.kinsta.page/games/fire-truck-dash/index.html">
+      <img src="img/firetruck-dash.jpeg" alt="Firetruck Dash">
+      <div class="overlay">Firetruck Dash</div>
+    </a>
+
+    <a class="game-card" href="http://idvij-kctpy.kinsta.page/games/alighn-4/index.html">
+      <img src="img/alighn-4.jpg" alt="Alighn 4">
+      <div class="overlay">Alighn 4</div>
+    </a>
+
+    <a class="game-card" href="https://mofp5g.csb.app/index.html">
+      <img src="img/ovo.jpeg" alt="Ovo">
+      <div class="overlay">Ovo</div>
+    </a>
+
+    <a class="game-card" href="http://o1vbe-ruf9g.kinsta.page/games/csgo-clicker/index.html">
+      <img src="img/csgo-clicker.jpg" alt="CSGO Clicker">
+      <div class="overlay">CSGO Clicker</div>
+    </a>
+
+    <a class="game-card" href="https://ostp5-86a3l.kinsta.page/games/lored/index.html">
+      <img src="img/lored.jpeg" alt="Lored">
+      <div class="overlay">Lored</div>
+    </a>
+
+    <a class="game-card" href="https://ostp5-86a3l.kinsta.page/games/accelenation/index.html">
+      <img src="img/accele-nation.jpeg" alt="Accele Nation">
+      <div class="overlay">Accele Nation</div>
+    </a>
+
+    <a class="game-card" href="https://vvx7o-mdgpn.kinsta.page/games/sm63/index.html">
+      <img src="img/sm63.jpg" alt="SM63">
+      <div class="overlay">SM63</div>
+    </a>
+
+    <a class="game-card" href="https://vvx7o-mdgpn.kinsta.page/games/reel/index.html">
+      <img src="img/reel.png" alt="Reel">
+      <div class="overlay">Reel</div>
+    </a>
+
+    <a class="game-card" href="https://vvx7o-mdgpn.kinsta.page/games/cubelight/index.html">
+      <img src="img/cubelight.jpeg" alt="Cubelight">
+      <div class="overlay">Cubelight</div>
+    </a>
+
+    <a class="game-card" href="https://vvx7o-mdgpn.kinsta.page/games/bubble-bobble/index.html">
+<img src="img/bubble-bobble.jpeg" alt="Bubble Bobble">
+<div class="overlay">Bubble Bobble</div>
+</a>
+<a class="game-card" href="http://dyiy4-53g73.kinsta.page/games/crossy-road/index.html">
+  <img src="img/crossy-road.jpeg" alt="Crossy Road">
+  <div class="overlay">Crossy Road</div>
+</a>
+</main> <script> function checkBannedCookie() { const cookies = document.cookie.split(';'); for (let cookie of cookies) { if (cookie.trim().startsWith('banned=')) { window.location.href = "https://dyiy4-53g73.kinsta.page/banned.html"; } } } function startSearch() { const input = document.getElementById('mySearch').value.toLowerCase(); const cards = document.querySelectorAll('.game-card'); cards.forEach(card => { const text = card.querySelector('.overlay').textContent.toLowerCase(); card.style.display = text.includes(input) ? 'block' : 'none'; }); } </script> </body> </html>
