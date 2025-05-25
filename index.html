@@ -3,215 +3,214 @@
 <head>
   <meta charset="UTF-8" />
   <title>Game Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="http://dyiy4-53g73.kinsta.page/img/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="http://dyiy4-53g73.kinsta.page/img/favicon.ico">
   <style>
-    :root {
-      --primary: #1de9b6;
-      --background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
-      --sidebar-bg: #f1f1f1;
-      --card-bg: #212a37;
-      --overlay-bg: rgba(24,31,42,0.94);
-      --radius: 20px;
-      --shadow: 0 6px 30px 0 rgba(30,40,80,0.13);
-    }
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', 'Arial', sans-serif;
-      background: var(--background);
-      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
       color: #eaf0fa;
     }
-    header {
-      background: #101722;
-      padding: 32px 0 14px 0;
-      text-align: center;
-      box-shadow: 0 2px 12px 0 #0002;
-      border-bottom: 2px solid #1de9b6;
+    .main-header {
+      background: #1de9b6;
+      background: linear-gradient(90deg, #1de9b6 0%, #17bcb7 100%);
+      color: #222;
+      text-align: left;
+      padding: 32px 0 18px 0;
+      padding-left: 242px;
+      box-shadow: 0 4px 20px 0 rgba(30, 40, 80, 0.13);
+      border-bottom: 2.5px solid #1de9b6;
+      position: relative;
     }
-    header h1 {
-      color: var(--primary);
-      font-size: 2.65rem;
+    .main-header h1 {
+      margin: 0;
+      font-size: 2.4rem;
       font-weight: 700;
-      margin: 0 0 8px 0;
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 14px #fff7, 0 1px 0 #1de9b6;
     }
-    header .subtitle {
-      color: #c9d7e7;
-      font-size: 1.1rem;
-      font-weight: 400;
+    .main-header .subtitle {
+      color: #005e5c;
+      font-size: 1.10rem;
+      font-weight: 500;
+      margin-top: 8px;
       letter-spacing: 0.01em;
     }
-    nav {
-      background: var(--sidebar-bg);
-      color: #222b39;
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      padding: 1.2rem 2rem;
-      font-size: 1.15rem;
-      border-bottom: 1.5px solid #19d6a8;
-      box-shadow: 0 2px 14px 0 #0001;
-    }
-    nav h3 {
-      color: #19d6a8;
-      margin: 0 16px 0 0;
-      font-size: 1.18rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-    nav a {
-      color: #fff;
-      background: #16bfa3;
-      text-decoration: none;
-      font-weight: 500;
-      border-radius: 9px;
-      padding: 8px 20px;
-      margin-right: 8px;
-      box-shadow: 0 2px 8px 0 #0002;
-      border: none;
-      transition: background 0.15s, color 0.15s;
-      display: inline-block;
-    }
-    nav a:hover {
-      background: var(--primary);
-      color: #121b24;
-    }
-    .search-bar {
-      text-align: center;
-      margin: 2.5rem 0 1.5rem 0;
-    }
-    #mySearch {
-      width: 420px;
-      max-width: 98vw;
-      padding: 16px 22px;
-      font-size: 1.17rem;
-      border-radius: 35px;
-      border: none;
-      background: #212c3b;
-      color: #e1e6fa;
-      outline: none;
-      box-shadow: 0 4px 18px 0 #0001;
-      transition: background 0.16s, color 0.16s;
-      text-align: center;
-    }
-    #mySearch:focus {
-      background: #2a3651;
-      color: #fff;
-    }
-    .main-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      padding: 2.5rem 1.5rem 3.5rem 1.5rem;
-      max-width: 1600px;
-      margin: 0 auto;
-    }
-    .game-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      width: 210px;
-      height: 270px;
-      text-decoration: none;
-      color: inherit;
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 220px;
+      height: 100vh;
+      background: #f5f7fa;
+      border-right: 2px solid #23b4b1;
+      box-shadow: 3px 0 30px -10px #21e9b644;
       display: flex;
       flex-direction: column;
-      position: relative;
-      border: 1.5px solid #2f3e55;
-      transition: transform 0.16s, box-shadow 0.16s, border-color 0.16s;
+      align-items: flex-start;
+      padding: 32px 0 0 0;
+      z-index: 10;
     }
-    .game-card:hover {
-      transform: translateY(-7px) scale(1.045);
-      box-shadow: 0 18px 40px 0 #21e9b62a, var(--shadow);
-      border-color: var(--primary);
-      z-index: 2;
+    .sidebar h3 {
+      margin: 0 0 18px 34px;
+      color: #16bfa3;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      font-weight: 700;
     }
-    .game-card img {
-      width: 100%;
-      height: 146px;
-      object-fit: cover;
-      border-top-left-radius: var(--radius);
-      border-top-right-radius: var(--radius);
-      background: #111;
-      flex-shrink: 0;
+    .sidebar a {
+      display: block;
+      color: #222e3a;
+      background: #e6f9f5;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 7px 0 0 7px;
+      margin: 0 0 10px 20px;
+      padding: 11px 24px;
+      transition: background 0.17s, color 0.15s;
+      font-size: 1.07rem;
+      width: 80%;
+      box-shadow: 0 2px 8px 0 #21e9b613;
     }
-    .game-title {
-      padding: 15px 8px 12px 8px;
-      color: #eaf0fa;
-      font-size: 1.09rem;
-      font-weight: 600;
+    .sidebar a:hover {
+      background: #1de9b6;
+      color: #174c49;
+    }
+    #mySearch {
+      width: 50%;
       text-align: center;
-      letter-spacing: 0.03em;
-      background: #212b3a;
-      border-bottom-left-radius: var(--radius);
-      border-bottom-right-radius: var(--radius);
-      min-height: 60px;
-      flex: 1 1 auto;
+      font-size: 18px;
+      color: #FFFFFF;
+      padding: 11px;
+      border: 2px solid #ddd;
+      border-radius: 30px;
+      background-color: rgb(53, 53, 53);
+      margin-bottom: 20px;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .game-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: flex-start;
+      margin-top: 30px;
+    }
+    .col-index-game {
+      width: 220px;
+      margin-bottom: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .container2 {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: #1a2538;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 18px 0 #0003;
+      transition: transform 0.17s, box-shadow 0.18s;
+    }
+    .container2:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 24px 0 #1de9b653;
+    }
+    .img-game-index {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      background: #222;
+      margin-bottom: 0;
+      padding: 0;
+      border: none;
+    }
+    .rcorners3 {
+      border-radius: 18px;
     }
     .overlay {
       position: absolute;
       left: 0; bottom: 0;
       width: 100%;
-      height: 100%;
-      background: var(--overlay-bg);
+      padding: 14px 0 10px 0;
+      background: rgba(28,36,48,0.94);
       color: #fff;
-      font-size: 1.13rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--radius);
       text-align: center;
+      font-size: 1.02rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
       opacity: 0;
+      transition: opacity 0.18s;
+      z-index: 2;
       pointer-events: none;
-      transition: opacity 0.16s;
-      z-index: 3;
-      padding: 20px 8px;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
     }
-    .game-card:hover .overlay {
-      opacity: 1;
-      pointer-events: auto;
-      background: #1de9b6f1;
-      color: #171e2a;
+    .container2:hover .overlay {
+      opacity: .89;
+      background: #1de9b6e8;
+      color: #174c49;
     }
-    @media (max-width: 880px) {
-      .main-content { gap: 14px; }
-      .game-card { width: 45vw; min-width: 140px; max-width: 240px; height: 180px; }
-      .game-card img { height: 70px; }
-      .game-title { min-height: 40px; font-size: 0.97rem; }
+    .container2 h6 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      text-shadow: 0 1px 6px #0009;
     }
-    @media (max-width: 540px) {
-      .main-content { padding: 0.5rem; }
-      .game-card { width: 97vw; min-width: 105px; max-width: 99vw; height: 120px; }
-      .game-card img { height: 48px; }
-      .game-title { min-height: 20px; font-size: 0.93rem; }
-      #mySearch { font-size: 1em; padding: 11px 8px; }
-      header h1 { font-size: 1.4rem; }
-      nav { flex-direction: column; gap: 10px; padding: 0.7rem 0.6rem; }
+    .content-area {
+      margin-left: 220px;
+      padding: 30px 30px 0 30px;
+    }
+    @media (max-width: 1100px) {
+      .main-header { padding-left: 0; text-align: center; }
+      .sidebar { position: static; width: 100%; height: auto; flex-direction: row; align-items: center; justify-content: center; border-right: 0; border-bottom: 2px solid #23b4b1; box-shadow: none; padding: 12px 0; }
+      .sidebar h3 { margin: 0 20px 0 0; }
+      .sidebar a { margin: 0 15px 0 0; width: auto; }
+      .content-area { margin-left: 0; }
+      .game-grid { justify-content: center; }
+    }
+    @media (max-width: 700px) {
+      .main-header h1 { font-size: 1.5rem; }
+      .main-header { padding: 16px 0 9px 0; }
+      .content-area { padding: 10px; }
+      .col-index-game { width: 100vw; }
+      .container2 { width: 92vw; }
+    }
+    @media (max-width: 530px) {
+      .sidebar { flex-direction: column; align-items: start; }
+      .main-header { padding: 12px 0 7px 0; }
+      .container2 { width: 99vw; }
     }
   </style>
 </head>
 <body onload="checkBannedCookie()">
-  <header>
-    <h1>Game Hub</h1>
-    <div class="subtitle">Updates Soon</div>
-  </header>
-  <nav>
+
+  <div class="sidebar">
     <h3>Pages</h3>
     <a href="https://discord.gg/cVcuv62C4Q" target="_blank" rel="noopener">TMS Discord</a>
-  </nav>
-  <section class="search-bar">
-    <input type="text" id="mySearch" onkeyup="startSearch()" placeholder="🔍 Search for games..." autocomplete="off" />
-  </section>
-  <main class="main-content" id="gameGallery"></main>
+  </div>
+  <div class="main-header">
+    <h1>Game Hub <span style="font-size:1.25rem; font-weight:400; color:#088f8e; margin-left:8px;">(Updates soon!)</span></h1>
+  </div>
+  <div class="content-area">
+    <div class="text-center">
+      <input type="text" class="text-center" id="mySearch" onkeyup="startSearch()" placeholder="Search for games..." title="Search" autofocus />
+    </div>
+    <div class="game-grid" id="gameGrid">
+      <!-- Games List will be injected here by JS -->
+    </div>
+  </div>
   <script>
-    // All games from your original code:
+    // All games from your original code for easy filter/search:
     const games = [
       { link: "http://idvij-kctpy.kinsta.page/games/10-min-till-dawn/index.html", img: "img/10-min-till-dawn.png", name: "10 minutes till dawn" },
       { link: "http://v7ukp-nvu1g.kinsta.page/games/super-flash-sonic/index.html", img: "img/super-flash-sonic.jpeg", name: "Super flash sonic" },
@@ -360,29 +359,21 @@
       { link: "https://vvx7o-mdgpn.kinsta.page/games/banners-begone/index.html", img: "img/banners-begone.jpeg", name: "Banners begone" },
       { link: "https://vvx7o-mdgpn.kinsta.page/games/get-yoked/index.html", img: "img/get-yoked.jpeg", name: "Get yoked" }
     ];
-
     function renderGames(filter = "") {
-      const gallery = document.getElementById("gameGallery");
-      gallery.innerHTML = "";
+      const grid = document.getElementById("gameGrid");
+      grid.innerHTML = "";
       let filtered = games;
       if (filter) {
         filtered = games.filter(g => g.name.toLowerCase().includes(filter.toLowerCase()));
       }
-      if (filtered.length === 0) {
-        gallery.innerHTML = `<div style="color:#fff; font-size:1.15rem; text-align:center; width:100%;">No games found for "<b>${filter}</b>"</div>`;
-        return;
-      }
       for (const game of filtered) {
-        const card = document.createElement("a");
-        card.className = "game-card";
-        card.href = game.link;
-        card.target = "_blank";
-        card.innerHTML = `
-          <img src="${game.img}" alt="${game.name}">
-          <div class="game-title">${game.name}</div>
-          <div class="overlay">${game.name}</div>
-        `;
-        gallery.appendChild(card);
+        const col = document.createElement("div");
+        col.className = "col-index-game";
+        col.innerHTML = `<div class="container2">
+          <a href="${game.link}" target="_blank"><img class="img-game-index rcorners3" src="${game.img}" alt="${game.name}"></a>
+          <h6 class="overlay rcorners3">${game.name}</h6>
+        </div>`;
+        grid.appendChild(col);
       }
     }
     function startSearch() {
@@ -390,12 +381,13 @@
       renderGames(val);
     }
     renderGames();
-
     function checkBannedCookie() {
       const cookies = document.cookie.split(';');
-      for (let cookie of cookies) {
-        if (cookie.trim().startsWith('banned=')) {
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.startsWith('banned=')) {
           window.location.href = "https://dyiy4-53g73.kinsta.page/banned.html";
+          return;
         }
       }
     }
