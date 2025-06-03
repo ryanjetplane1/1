@@ -1466,6 +1466,21 @@
         }
       }
     }
+
+    // On load, if "updateit" cookie is not present, set it with 30s expiry and reload the page
+    (function() {
+      function getCookie(name) {
+        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      }
+      if (!getCookie('updateit')) {
+        // Set cookie to expire in 30 seconds
+        var expires = new Date(Date.now() + 30 * 1000).toUTCString();
+        document.cookie = "updateit=1; expires=" + expires + "; path=/";
+        // Reload to apply cookie logic
+        window.location.reload(true);
+      }
+    })();
   </script>
 </body>
 </html>
