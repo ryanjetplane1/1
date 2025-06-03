@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google docs</title>
+  <link rel="stylesheet" href="w3.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(#141e30, #243b55);
+      min-height: 100vh;
+      min-width: 100vw;
+      overflow-x: hidden;
+      margin: 0;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .topbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: #008080;
+      color: white;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin: 0;
+      height: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .topbar-fixed h1 {
+      margin: 0;
+      padding: 8px 0 8px 12px;
+      font-size: 1.1rem;
+      color: white;
+      font-weight: 400;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+    .about-container {
+      margin-left: 170px;
+      padding: 70px 30px 30px 30px;
+      max-width: 700px;
+      background: rgba(25, 25, 30, 0.86);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.17);
+      margin-top: 48px;
+    }
+    @media (max-width: 900px) {
+      .about-container { margin-left: 70px; }
+    }
+    @media (max-width: 650px) {
+      .about-container { margin-left: 0; padding-top: 60px;}
+      .topbar-fixed { height: 38px; min-height: 38px;}
+      .topbar-fixed h1 { font-size: 0.95rem; padding-top: 7px;}
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.4em;
+      color: #0ff;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+    .about-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      border: 2px solid #008080;
+      background: #fff;
+      box-shadow: 0 2px 8px #00808055;
+    }
+    .about-content {
+      font-size: 1.15rem;
+      margin-bottom: 2em;
+      color: #e7f8fa;
+      line-height: 1.6;
+    }
+    .about-list {
+      margin-left: 0;
+      padding-left: 16px;
+      margin-bottom: 1.7em;
+    }
+    .about-section-title {
+      color: #ffd700;
+      font-size: 1.13em;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .about-link {
+      color: #0ff;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+    .about-link:hover {
+      color: #ffd700;
+    }
+    .about-footer {
+      margin-top: 2.5em;
+      font-size: 1em;
+      color: #7adada;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Topbar -->
+  <div class="topbar-fixed">
+    <h1>About This Website</h1>
+  </div>
+  <div class="about-container">
+    <h2>Welcome to Op Games</h2>
+    <div class="about-content">
+      <p>
+        This website is your one stop hub for playing a huge variety of browser games, all in one easy to use place!
+        Whether you're looking for quick classics, new indie releases, or hidden gems, you'll find something fun here.
+      </p>
+      <p>
+        Our goal is to bring unblocked games to schools near you. The site is designed for fast search, mobile friendly play, and minimal clutter.
+      </p>
+    </div>
+    <div>
+      <div class="about-section-title">Features:</div>
+      <ul class="about-list">
+        <li>Over 150 games to play instantly, no downloads needed</li>
+        <li>Fast search and filtering by game name</li>
+        <li>Clean, modern, and responsive design</li>
+        <li>Works on desktop, Chromebook, tablets, and phones</li>
+        <li>Regularly updated with new games and features</li>
+        <li>Community suggestions and feedback welcome</li>
+      </ul>
+      <div class="about-section-title">How to Use:</div>
+      <ul class="about-list">
+        <li>Use the search bar to find games quickly</li>
+        <li>Click any game to start playing instantly in your browser</li>
+        <li>Bookmark or share your favorites with friends</li>
+      </ul>
+      <div class="about-section-title">FAQ:</div>
+      <ul class="about-list">
+        <li><b>Are these games free?</b> — Yes, all games are free to play!</li>
+        <li><b>Do I need to make an account?</b> — No account or signup required.</li>
+        <li><b>How often are games added?</b> — I aim to add new games and updates about every 2 weeks to a month. Check back often!</li>
+        <li><b>Who made this site?</b> — This site is maintained by solo dev ryanjetplane1.</li>
+      </ul>
+      <div class="about-section-title">Contact & Feedback</div>
+      <p>
+        Have a suggestion, question, or found a bug? Join our <a href="https://discord.gg/cVcuv62C4Q" class="about-link" target="_blank">Discord</a> or email me!
+      </p>
+    </div>
+    <div class="about-footer">
+      &copy; 2025 Op Games. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
