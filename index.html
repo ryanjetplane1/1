@@ -5,6 +5,20 @@
   <link rel="icon" type="image/x-icon" href="http://dyiy4-53g73.kinsta.page/img/favicon.ico">
   <title>Google docs</title>
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(#141e30, #243b55);
+      min-height: 100vh;
+      min-width: 100vw;
+      overflow-x: hidden;
+      margin: 0;
+    }
     #mySearch {
       width: 50%;
       text-align: center;
@@ -36,9 +50,6 @@
       border: solid;
       border-wid: medium;
       border-color: #fff;
-    }
-    body {
-      background: linear-gradient(#141e30, #243b55);
     }
     a {
       color: Black;
@@ -99,49 +110,6 @@
       position: relative;
       wid: 50%;
     }
-    div.scroll {
-      wid: 1300px;
-      height: 600px;
-      overflow-x: hidden;
-      overflow-y: auto;
-      text-align: center;
-      padding: 20px;
-    }
-    /* Sidebar styles */
-    .custom-sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 210px;
-      height: 100vh;
-      background-color: #0D1117;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 2px 0 14px rgba(0,0,0,0.14);
-      z-index: 20;
-      padding-top: 66px; /* To clear the topbar */
-      gap: 0;
-    }
-    .custom-sidebar .value {
-      background-color: transparent;
-      border: none;
-      padding: 15px 20px;
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      border-radius: 6px;
-      font-size: 16px;
-      margin: 2px 10px;
-      transition: background 0.13s;
-    }
-    .custom-sidebar .value:hover {
-      background-color: #161b22;
-    }
     /* Topbar */
     .topbar-fixed {
       position: fixed;
@@ -163,10 +131,57 @@
       font-weight: 400;
       letter-spacing: 1px;
     }
+    /* Sidebar styles */
+    .custom-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 210px;
+      height: 100vh;
+      background-color: #0D1117;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 0 14px rgba(0,0,0,0.14);
+      z-index: 20;
+      padding-top: 90px; /* More space from topbar for first button */
+      gap: 0;
+    }
+    .custom-sidebar .value {
+      background-color: transparent;
+      border: none;
+      padding: 15px 20px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 16px;
+      margin: 2px 10px;
+      transition: background 0.13s;
+    }
+    .custom-sidebar .value:hover {
+      background-color: #161b22;
+    }
     /* Main content offset for sidebar and topbar */
     .scroll {
       margin-left: 210px !important;
       padding-top: 80px;
+      min-height: calc(100vh - 80px);
+      box-sizing: border-box;
+      /* Allow scrolling if content overflows on y-axis */
+      overflow-y: auto;
+      background: transparent;
+    }
+    /* Prevent page bottom cut-off */
+    .page-content-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
     @media (max-width: 700px) {
       .custom-sidebar {
@@ -228,52 +243,54 @@
     </button>
   </div>
   <!-- Main content -->
-  <div class="scroll" id="search">
-    <div style="margin-top:10%">
-      <div class="text-center">
-        <input type="text" class="text-center" id="mySearch" onload="startSearch()" onkeyup="startSearch()" placeholder="Search for games..." title="Search" autofocus />
-      </div>
-      <script src="search.js"></script>
-      <div class="col-index-game" style="float: left">
-        <div class="container2">
-          <a href="http://idvij-kctpy.kinsta.page/games/10-min-till-dawn/index.html"><img class="img-game-index rcorners3" src="img/10-min-till-dawn.png"></a>
-          <h6 class="overlay rcorners3">10 minutes till dawn</h6>
+  <div class="page-content-wrapper">
+    <div class="scroll" id="search">
+      <div style="margin-top:10%">
+        <div class="text-center">
+          <input type="text" class="text-center" id="mySearch" onload="startSearch()" onkeyup="startSearch()" placeholder="Search for games..." title="Search" autofocus />
         </div>
-      </div>
-      <div class="col-index-game" style="float: left">
-        <div class="container2">
-          <a href="http://v7ukp-nvu1g.kinsta.page/games/super-flash-sonic/index.html"><img class="img-game-index rcorners3" src="img/super-flash-sonic.jpeg"></a>
-          <h6 class="overlay rcorners3">Super flash sonic</h6>
+        <script src="search.js"></script>
+        <div class="col-index-game" style="float: left">
+          <div class="container2">
+            <a href="http://idvij-kctpy.kinsta.page/games/10-min-till-dawn/index.html"><img class="img-game-index rcorners3" src="img/10-min-till-dawn.png"></a>
+            <h6 class="overlay rcorners3">10 minutes till dawn</h6>
+          </div>
         </div>
-      </div>
-      <div class="col-index-game" style="float: left">
-        <div class="container2">
-          <a href="http://hfiqw-46d8o.kinsta.page/games/idle-dice/index.html"><img class="img-game-index rcorners3" src="img/idle-dice.jpeg"></a>
-          <h6 class="overlay rcorners3">Idle dice</h6>
+        <div class="col-index-game" style="float: left">
+          <div class="container2">
+            <a href="http://v7ukp-nvu1g.kinsta.page/games/super-flash-sonic/index.html"><img class="img-game-index rcorners3" src="img/super-flash-sonic.jpeg"></a>
+            <h6 class="overlay rcorners3">Super flash sonic</h6>
+          </div>
         </div>
-      </div>
-      <div class="col-index-game" style="float: left">
-        <div class="container2">
-          <a href="http://kfony-b1u5o.kinsta.page/games/rabbit-samuri/index.html"><img class="img-game-index rcorners3" src="img/rabbit-samuri.jpeg"></a>
-          <h6 class="overlay rcorners3">Rabbit samuri 2</h6>
+        <div class="col-index-game" style="float: left">
+          <div class="container2">
+            <a href="http://hfiqw-46d8o.kinsta.page/games/idle-dice/index.html"><img class="img-game-index rcorners3" src="img/idle-dice.jpeg"></a>
+            <h6 class="overlay rcorners3">Idle dice</h6>
+          </div>
         </div>
-      </div>
-      <div class="col-index-game" style="float: left">
-        <div class="container2">
-          <a href="http://k8sn3-15oyh.kinsta.page/games/basket-random/index.html"><img class="img-game-index rcorners3" src="img/basket-random.jpeg"></a>
-          <h6 class="overlay rcorners3">Basket random</h6>
+        <div class="col-index-game" style="float: left">
+          <div class="container2">
+            <a href="http://kfony-b1u5o.kinsta.page/games/rabbit-samuri/index.html"><img class="img-game-index rcorners3" src="img/rabbit-samuri.jpeg"></a>
+            <h6 class="overlay rcorners3">Rabbit samuri 2</h6>
+          </div>
         </div>
-      </div>
-      <div class="col-index-game" style="float: left">
-        <div class="container2">
-          <a href="https://vvx7o-mdgpn.kinsta.page/games/banners-begone/index.html"><img class="img-game-index rcorners3" src="img/banners-begone.jpeg"></a>
-          <h6 class="overlay rcorners3">Banners begone</h6>
+        <div class="col-index-game" style="float: left">
+          <div class="container2">
+            <a href="http://k8sn3-15oyh.kinsta.page/games/basket-random/index.html"><img class="img-game-index rcorners3" src="img/basket-random.jpeg"></a>
+            <h6 class="overlay rcorners3">Basket random</h6>
+          </div>
         </div>
-      </div>
-      <div class="col-index-game" style="float: left">
-        <div class="container2">
-          <a href="https://vvx7o-mdgpn.kinsta.page/games/get-yoked/index.html"><img class="img-game-index rcorners3" src="img/get-yoked.jpeg"></a>
-          <h6 class="overlay rcorners3">Get yoked</h6>
+        <div class="col-index-game" style="float: left">
+          <div class="container2">
+            <a href="https://vvx7o-mdgpn.kinsta.page/games/banners-begone/index.html"><img class="img-game-index rcorners3" src="img/banners-begone.jpeg"></a>
+            <h6 class="overlay rcorners3">Banners begone</h6>
+          </div>
+        </div>
+        <div class="col-index-game" style="float: left">
+          <div class="container2">
+            <a href="https://vvx7o-mdgpn.kinsta.page/games/get-yoked/index.html"><img class="img-game-index rcorners3" src="img/get-yoked.jpeg"></a>
+            <h6 class="overlay rcorners3">Get yoked</h6>
+          </div>
         </div>
       </div>
     </div>
