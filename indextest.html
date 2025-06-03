@@ -508,16 +508,16 @@
         }
       }
     }
-    // 24-hour auto-reload with localStorage
-    (function() {
-      var lastReload = localStorage.getItem('lastReloadTime');
-      var now = Date.now();
-      var oneDay = 20 * 1000;
-      if (!lastReload || (now - Number(lastReload)) > oneDay) {
-        localStorage.setItem('lastReloadTime', now);
-        window.location.reload(true);
-      }
-    })();
-  </script>
+  // 20-second auto-reload, even if the page is closed and reopened
+  (function() {
+    var lastReload = localStorage.getItem('lastReloadTime');
+    var now = Date.now();
+    var interval = 20 * 1000; // 20 seconds in milliseconds
+    if (!lastReload || (now - Number(lastReload)) > interval) {
+      localStorage.setItem('lastReloadTime', now);
+      window.location.reload(true);
+    }
+  })();
+</script>
 </body>
 </html>
