@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wheel of Fortune Spinner Game</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+    }
+    .spinner-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .wheel-and-counters-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    .counter-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 110px;
+    }
+    .counter-label {
+      font-size: 1.18em;
+      font-weight: bold;
+      color: #555;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    .counter-value {
+      font-size: 2em;
+      font-weight: bold;
+      color: #222;
+      margin-top: 4px;
+      text-align: center;
+    }
+    .wheel-container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      margin: 0 10px;
+    }
+    .wheel-svg {
+      width: 320px;
+      height: 320px;
+      display: block;
+    }
+    /* Pointer at top, pointing up (rotated 180deg), moved down 20px from previous position */
+    .pointer {
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 45px solid #E2E5DE;
+      position: absolute;
+      left: 50%;
+      top: -5px; /* Was -54px, now moved down 20px */
+      transform: translateX(-50%) rotate(180deg);
+      z-index: 2;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15));
+      pointer-events: none;
+    }
+    .spin-btn {
+      padding: 15px 40px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 10px;
+    }
+    .spin-btn:active {
+      background: #388E3C;
+    }
+    .result {
+      font-size: 1.3em;
+      margin-top: 24px;
+      min-height: 30px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="spinner-container">
+    <div class="wheel-and-counters-row">
+      <div class="counter-box">
+        <div class="counter-label">Record</div>
+        <div class="counter-value" id="recordCounter">0</div>
+      </div>
+      <div class="wheel-container">
+        <svg id="wheel" class="wheel-svg"></svg>
+        <div class="pointer"></div>
+      </div>
+      <div class="counter-box">
+        <div class="counter-label">Current Streak</div>
+        <div class="counter-value" id="streakCounter">0</div>
+      </div>
+    </div>
+    <button class="spin-btn" id="spinBtn">Spin</button>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    // Wheel settings
+    // BAN is index 0, so its center is at 0deg (top)
+    const SEGMENTS = [
+      { label: "BAN",  color: "#333" },
+      { label: "SAFE", color: "#4CAF50" },
+      { label: "SAFE", color: "#f1c40f" },
+      { label: "SAFE", color: "#3498db" },
+      { label: "SAFE", color: "#9b59b6" },
+      { label: "SAFE", color: "#e67e22" },
+      { label: "SAFE", color: "#1abc9c" },
+      { label: "SAFE", color: "#e74c3c" }
+    ];
+    const BAN_INDEX = 0; // Always the top segment
+    const WHEEL_RADIUS = 160;
+    const CENTER = WHEEL_RADIUS;
+    const WHEEL_SIZE = WHEEL_RADIUS * 2;
+    const TEXT_RADIUS = 120;
+
+    // Counter logic
+    // Use localStorage to persist the record
+    function getRecord() {
+      return parseInt(localStorage.getItem("spinRecord") || "0", 10);
+    }
+    function setRecord(val) {
+      localStorage.setItem("spinRecord", String(val));
+    }
+    function resetStreak() {
+      sessionStorage.setItem("spinStreak", "0");
+    }
+    function getStreak() {
+      return parseInt(sessionStorage.getItem("spinStreak") || "0", 10);
+    }
+    function setStreak(val) {
+      sessionStorage.setItem("spinStreak", String(val));
+    }
+    function updateCountersDisplay() {
+      document.getElementById("streakCounter").textContent = getStreak();
+      document.getElementById("recordCounter").textContent = getRecord();
+    }
+
+    // Initialize counters
+    if (!localStorage.getItem("spinRecord")) setRecord(0);
+    if (!sessionStorage.getItem("spinStreak")) setStreak(0);
+    updateCountersDisplay();
+
+    function drawWheel() {
+      const svg = document.getElementById('wheel');
+      svg.setAttribute('width', WHEEL_SIZE);
+      svg.setAttribute('height', WHEEL_SIZE);
+      svg.innerHTML = '';
+      const numSegments = SEGMENTS.length;
+      const anglePerSegment = 2 * Math.PI / numSegments;
+      for (let i = 0; i < numSegments; i++) {
+        const startAngle = i * anglePerSegment - Math.PI / 2;
+        const endAngle = (i + 1) * anglePerSegment - Math.PI / 2;
+        const x1 = CENTER + WHEEL_RADIUS * Math.cos(startAngle);
+        const y1 = CENTER + WHEEL_RADIUS * Math.sin(startAngle);
+        const x2 = CENTER + WHEEL_RADIUS * Math.cos(endAngle);
+        const y2 = CENTER + WHEEL_RADIUS * Math.sin(endAngle);
+        const largeArcFlag = anglePerSegment > Math.PI ? 1 : 0;
+        const pathData = [
+          `M${CENTER},${CENTER}`,
+          `L${x1},${y1}`,
+          `A${WHEEL_RADIUS},${WHEEL_RADIUS} 0 ${largeArcFlag} 1 ${x2},${y2}`,
+          'Z'
+        ].join(' ');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', SEGMENTS[i].color);
+        svg.appendChild(path);
+
+        // Add text
+        const textAngle = startAngle + anglePerSegment / 2;
+        const textX = CENTER + TEXT_RADIUS * Math.cos(textAngle);
+        const textY = CENTER + TEXT_RADIUS * Math.sin(textAngle);
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', textX);
+        text.setAttribute('y', textY + 8);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('font-size', '26');
+        text.setAttribute('font-family', 'Arial, sans-serif');
+        text.setAttribute('fill', SEGMENTS[i].label === "BAN" ? "#fff" : "#222");
+        text.setAttribute('font-weight', SEGMENTS[i].label === "BAN" ? "bold" : "normal");
+        text.setAttribute('transform', `rotate(${(textAngle * 180 / Math.PI)},${textX},${textY})`);
+        text.textContent = SEGMENTS[i].label;
+        svg.appendChild(text);
+      }
+    }
+
+    drawWheel();
+
+    // Spinner logic
+    const spinBtn = document.getElementById('spinBtn');
+    const resultDiv = document.getElementById('result');
+    const svg = document.getElementById('wheel');
+
+    let spinning = false;
+    let currentRotation = 0;
+
+    /**
+     * Returns the rotation (degrees) needed so that the segment at chosenIndex is at the top (12:00)
+     * Because the pointer is at the top pointing down!
+     */
+    function computeTargetRotation(chosenIndex, spins, numSegments) {
+      const segmentAngle = 360 / numSegments;
+      // Center of segment i is at angle i*segmentAngle + segmentAngle/2
+      // To bring chosenIndex's center to top (0deg), rotate so its center aligns with 0deg
+      const targetSegmentCenter = chosenIndex * segmentAngle + segmentAngle / 2;
+      const offsetToTop = 360 - targetSegmentCenter;
+      // Add spins for animation
+      return spins * 360 + offsetToTop;
+    }
+
+    function spinWheel() {
+      if (spinning) return;
+      spinning = true;
+      resultDiv.textContent = "";
+      spinBtn.disabled = true;
+
+      // 10% ban chance, map to the ban segment
+      const isBan = Math.random() < 0.10;
+      const numSegments = SEGMENTS.length;
+      let chosenIndex;
+      if (isBan) {
+        chosenIndex = BAN_INDEX;
+      } else {
+        // Pick any safe segment index
+        const safeIndexes = SEGMENTS.map((s, i) => s.label === "SAFE" ? i : null).filter(i => i !== null);
+        chosenIndex = safeIndexes[Math.floor(Math.random() * safeIndexes.length)];
+      }
+
+      const spins = 5;
+      const targetRotation = computeTargetRotation(chosenIndex, spins, numSegments);
+
+      svg.style.transition = 'transform 3.3s cubic-bezier(.18,.87,.56,1.07)';
+      svg.style.transform = `rotate(${targetRotation}deg)`;
+
+      setTimeout(() => {
+        spinning = false;
+        spinBtn.disabled = false;
+        // Set the rotation to just the final angle (modulo 360) WITHOUT animation
+        const finalRotation = computeTargetRotation(chosenIndex, 0, numSegments) % 360;
+        svg.style.transition = 'none';
+        svg.style.transform = `rotate(${finalRotation}deg)`;
+        currentRotation = finalRotation;
+
+        if (SEGMENTS[chosenIndex].label === "BAN") {
+          // Check and update record
+          const streak = getStreak();
+          const record = getRecord();
+          if (streak > record) setRecord(streak);
+          updateCountersDisplay();
+          resultDiv.textContent = "BANNED! Bad luck...";
+          resetStreak();
+          setTimeout(() => {
+            window.location.href = "https://dyiy4-53g73.kinsta.page/banned.html";
+          }, 1200); // Show the result for 1.2s before redirect
+        } else {
+          // Increase streak, update record if needed
+          let streak = getStreak() + 1;
+          setStreak(streak);
+          if (streak > getRecord()) setRecord(streak);
+          updateCountersDisplay();
+          resultDiv.textContent = "Safe! You survived the spin.";
+        }
+      }, 3300);
+    }
+
+    spinBtn.addEventListener('click', spinWheel);
+
+    // On page load, update counters in case user refreshed or came back
+    updateCountersDisplay();
+  </script>
+</body>
+</html>
